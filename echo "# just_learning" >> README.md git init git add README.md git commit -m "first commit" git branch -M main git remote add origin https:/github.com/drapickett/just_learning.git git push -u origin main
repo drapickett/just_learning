@@ -1,0 +1,80 @@
+#todo: 
+#make a calculator/cash register
+#define variables (coin values)
+#do the coin change
+#coin conter
+#omg float sucks! so i'm importing a decimal library because if your change is 0.05, i don't want you to receive 0.04!
+#how will anyone figure out why their code is broken?
+
+from decimal import *
+
+nickel = round(Decimal(0.05),2)
+dime = round(Decimal(.10),2)
+quarter = round(Decimal(.25),2)
+one_dollar = round(Decimal(1.0),2)
+penny = round(Decimal(.01),2)
+
+quarter_counter = 0
+dime_counter = 0
+nickel_counter = 0
+penny_counter = 0
+
+print ("""Hello friend, my name is Aime and I am blind.
+ Please help me by answering this question -
+ What are you buying today?""")
+buying = input()
+
+print ("And tell me, how much does " + buying + " cost? Oh and please answer in decimal format. For example, if the item costs 75 cents, write .75")
+cost = Decimal(input())
+
+print ("How many dollars are you paying with?")
+money = Decimal(input())
+
+change = Decimal(money - cost)
+change = str(change)
+
+print ("Okay, your change will be " + change + " cents")
+change = round(Decimal(change),2)
+while (change >= quarter):
+  change = round(change - quarter,2)
+  quarter_counter = quarter_counter + 1
+while (change >= dime):
+  change = round(change - dime,2)
+  dime_counter = dime_counter + 1
+while (change >= nickel):
+  change = round(change - nickel,2)
+  nickel_counter = nickel_counter + 1
+while (change >= penny):
+  change = round(change - penny,2)
+  penny_counter = penny_counter + 1
+
+
+statement = "In coins that's "
+if (quarter_counter == 1):
+  statement = statement + str(quarter_counter) + " quarter, "
+elif (quarter_counter > 1):
+  statement = statement + str(quarter_counter) + " quarters, "
+if (dime_counter == 1):
+  statement = statement + str(dime_counter) + " dime, "
+elif (dime_counter > 1):
+  statement = statement + str(dime_counter) + " dimes, "
+if (nickel_counter == 1):
+  statement = statement + str(nickel_counter) + " nickel, "
+elif (nickel_counter > 1):
+  statement = statement + str(nickel_counter) + " nickels, "
+if (penny_counter == 1):
+  statement = statement + "and " + str(penny_counter) + " penny, "
+elif (penny_counter > 1):
+  statement = statement + "and " + str(penny_counter) + " pennies "
+print (statement)
+
+print ("Would you like a bag for the " + buying + "?")
+bag = input ()
+if bag == "no":
+  print ("Okay, good choice. Have a great day!")
+else:
+  if bag == "yes":
+    print ("Okay, here you go. Have a good one.")
+
+print ("""The Coin Counter Program has now ended.
+        Thank you for trying it out! 😊 """)
